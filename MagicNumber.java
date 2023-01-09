@@ -32,14 +32,20 @@ final class MagicNumber {
     public static final int MAGICNUM = 15;
 
 
-    public static void genSquare(final int[] square, final int[] currentSquare, final int index) {
+    public static void genSquare(final int[] square, final int[] currentSquare, int index) {
+        int index2 = index;
         for (int counter = 0; counter < square.length; counter++) {
-            int random = (int)(Math.random() * 9 + 1);
+            final int index3 = index2;
+            // generate a random number from 1-9
+            final int random = (int) (Math.random() * 9 + 1);
+            // if this number is not used
             if (currentSquare[random - 1] == 0) {
+                // change it in used, assign the first index into the number
                 currentSquare[random - 1] = 1;
-                square[index] = random;
-                if (index < square.length - 1) {
-                    genSquare(square, currentSquare, index + 1);
+                square[index3] = random;
+                if (index2 < square.length - 1) {
+                    index2 = index2 + 1;
+                    continue;
                 } else {
                     if (isMagic(square)) {
                         printMagicSquare(square);
@@ -51,7 +57,7 @@ final class MagicNumber {
                     }
                 }
             } else {
-                counter--;
+                counter = counter - 1;
                 continue;
             }
         }
