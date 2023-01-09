@@ -33,7 +33,22 @@ final class MagicNumber2 {
 
 
    public static void genSquare(final int[] square, final int[] currentSquare, int index) {
-       
+    for (int counter = 0; counter < square.length ; counter++) {
+        if (currentSquare[counter] == 0) {
+         square[index] = counter + 1;
+         currentSquare[counter] = 1;
+         if (index < square.length) {
+            genSquare(square, currentSquare, index + 1);
+         } else {
+            if (isMagic(square)) {
+                printMagicSquare(square);
+            } else {
+                System.out.println("Try again.");
+            }
+         }
+         currentSquare[counter] = 0;
+        }
+    } 
    }
 
    public static boolean isMagic(final int[] preSquare) {
